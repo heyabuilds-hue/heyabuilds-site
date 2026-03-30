@@ -213,7 +213,7 @@ function Contact() {
           <div className="space-y-10">
             <div>
               <p className="uppercase tracking-[0.4em] text-purple-300 text-xs font-black mb-4">Email Us</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4">heya@builds.com</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4">heyabuilds@gmail.com</p>
             </div>
             <div>
               <p className="uppercase tracking-[0.4em] text-purple-300 text-xs font-black mb-4">Location</p>
