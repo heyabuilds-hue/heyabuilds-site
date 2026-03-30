@@ -88,12 +88,13 @@ function Home() {
         </div>
       </section>
 
-      {/* VISION QUOTE */}
-      <section className="py-32 bg-[#2D1233] text-white text-center px-10">
-        <h2 className={`text-4xl md:text-6xl max-w-5xl mx-auto leading-tight ${serifFont} text-white`}>
-          "When women build technology together, they create stronger innovation ecosystems."
-        </h2>
-      </section>
+   {/* VISION STATEMENT (Slide 06) */}
+<section className="py-32 bg-[#2D1233] text-white text-center px-10">
+  {/* I removed ${serifFont} and manually typed the font styles to ensure it stays white */}
+  <h2 className="text-4xl md:text-6xl max-w-5xl mx-auto leading-tight font-serif italic tracking-tight text-white">
+    "When women build technology together, they create stronger innovation ecosystems."
+  </h2>
+</section>
     </div>
   );
 }
