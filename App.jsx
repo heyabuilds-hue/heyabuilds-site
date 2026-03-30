@@ -269,7 +269,7 @@ export default function App() {
         
         {/* Minimalist Footer */}
         <footer className="py-20 bg-white border-t border-gray-50 text-center">
-           <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">© 2024 HeyaBuilds Medina • Built to Inspire</p>
+           <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">© 2026 HeyaBuilds Medina • Built to Inspire</p>
         </footer>
       </div>
     </BrowserRouter>
