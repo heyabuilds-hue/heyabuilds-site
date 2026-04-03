@@ -34,7 +34,8 @@ const translations = {
       p3: "Mentorship", p3d: "1:1 guidance from industry experts",
       apply: "Apply Now"
     },
-    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" }
+    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" },
+    footer: "© 2026 HeyaBuilds Medina • Built to Inspire"
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
@@ -67,7 +68,8 @@ const translations = {
       p3: "التوجيه الشخصي", p3d: "إرشادات مباشرة من خبراء الصناعة",
       apply: "سجلي الآن"
     },
-    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" }
+    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" },
+    footer: "© ٢٠٢٦ هِيَ تبني - المدينة المنورة • صُنعت للإلهام"
   }
 };
 
@@ -156,8 +158,8 @@ function Home() {
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
         
-        {/* LEFT SECTION (LIGHT PURPLE) - "هي تبني" */}
-        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-center md:text-start items-center md:items-start">
+        {/* LEFT SECTION (LIGHT PURPLE) */}
+        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start items-start">
           <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
             {t('hero.title')}
           </h1>
@@ -169,12 +171,12 @@ function Home() {
           </p>
         </div>
 
-        {/* RIGHT SECTION (DARK PURPLE) - "لنبني!" */}
-        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-start items-center md:items-start">
+        {/* RIGHT SECTION (DARK PURPLE) */}
+        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-start items-start">
           <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
           </h2>
-          <div className="flex items-center justify-center md:justify-start gap-4 text-2xl opacity-90 italic w-full">
+          <div className="flex items-center justify-start gap-4 text-2xl opacity-90 italic w-full">
              <span>📍</span> <span>{t('hero.location')}</span>
           </div>
           <Link to="/community" className="mt-14 w-fit px-12 py-5 bg-white text-[#823894] text-xl font-black rounded-full hover:scale-105 transition shadow-2xl uppercase">
@@ -301,7 +303,7 @@ function Contact() {
           <div className="space-y-10">
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.email')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4">heyabuilds@gmail.com</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">heyabuilds@gmail.com</p>
             </div>
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.loc')}</p>
@@ -343,10 +345,11 @@ export default function App() {
               font-family: 'Cairo', sans-serif;
               font-style: normal;
             }
-            footer p {
+            /* Helper to keep emails/dates LTR always */
+            .ltr-force {
               direction: ltr !important;
+              unicode-bidi: isolate;
               display: inline-block;
-              width: 100%;
             }
           `}
         </style>
@@ -360,11 +363,13 @@ export default function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+
+          {/* DYNAMIC FOOTER: All English in EN mode, All Arabic in AR mode */}
           <LanguageContext.Consumer>
-            {({ lang }) => (
-              <footer className="py-20 bg-white border-t border-gray-50 text-center">
-                 <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
-                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
+            {({ lang, t }) => (
+              <footer className={`py-20 bg-white border-t border-gray-50 px-10 ${lang === 'ar' ? 'text-right' : 'text-center'}`}>
+                 <p className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
+                    {t('footer')}
                  </p>
               </footer>
             )}
