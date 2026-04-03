@@ -34,7 +34,8 @@ const translations = {
       p3: "Mentorship", p3d: "1:1 guidance from industry experts",
       apply: "Apply Now"
     },
-    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" }
+    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" },
+    footer: "© 2026 HeyaBuilds Medina • Built to Inspire"
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
@@ -67,7 +68,8 @@ const translations = {
       p3: "التوجيه الشخصي", p3d: "إرشادات مباشرة من خبراء الصناعة",
       apply: "سجلي الآن"
     },
-    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" }
+    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" },
+    footer: "© ٢٠٢٦ هِيَ تبني - المدينة المنورة • صُنعت للإلهام"
   }
 };
 
@@ -76,10 +78,7 @@ const LanguageContext = createContext();
 
 function LanguageProvider({ children }) {
   const [lang, setLang] = useState("en");
-  
-  const toggleLanguage = () => {
-    setLang((prev) => (prev === "en" ? "ar" : "en"));
-  };
+  const toggleLanguage = () => setLang((prev) => (prev === "en" ? "ar" : "en"));
 
   useEffect(() => {
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
@@ -274,10 +273,7 @@ function Community() {
       <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white text-center">
         <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
         <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
-          <iframe 
-            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
-            width="100%" height="100%" frameBorder="0" title="Join"
-          ></iframe>
+          <iframe src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" width="100%" height="100%" frameBorder="0" title="Join"></iframe>
         </div>
       </div>
     </div>
@@ -298,19 +294,16 @@ function Contact() {
           <div className="space-y-10">
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.email')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">heyabuilds@gmail.com</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4">heyabuilds@gmail.com</p>
             </div>
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.loc')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">{t('hero.location')}</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4">{t('hero.location')}</p>
             </div>
           </div>
         </div>
         <div className="bg-white rounded-[4rem] overflow-hidden h-[700px] shadow-2xl">
-          <iframe 
-            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
-            width="100%" height="100%" frameBorder="0" title="Contact"
-          ></iframe>
+          <iframe src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" width="100%" height="100%" frameBorder="0" title="Contact"></iframe>
         </div>
       </div>
     </div>
@@ -325,26 +318,10 @@ export default function App() {
         <style>
           {`
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,800&family=Cairo:wght@400;700;900&display=swap');
-            
-            :root {
-              font-family: 'Montserrat', sans-serif;
-              scroll-behavior: smooth;
-            }
-            [lang="ar"] :root {
-              font-family: 'Cairo', sans-serif;
-            }
-            .font-serif {
-              font-family: 'Playfair Display', serif;
-            }
-            [lang="ar"] .font-serif {
-              font-family: 'Cairo', sans-serif;
-              font-style: normal;
-            }
-            .ltr-force {
-              direction: ltr !important;
-              unicode-bidi: isolate;
-              display: inline-block;
-            }
+            :root { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+            [lang="ar"] :root { font-family: 'Cairo', sans-serif; }
+            .font-serif { font-family: 'Playfair Display', serif; }
+            [lang="ar"] .font-serif { font-family: 'Cairo', sans-serif; font-style: normal; }
           `}
         </style>
         
@@ -359,14 +336,10 @@ export default function App() {
           </Routes>
           
           <LanguageContext.Consumer>
-            {({ lang }) => (
-              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center px-6">
-                 {/* 
-                    Using dir="ltr" on the <p> tag ensures the bullet and year symbols 
-                    don't flip around. It keeps the format English but swaps the name 
-                 */}
-                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
-                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
+            {({ lang, t }) => (
+              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center w-full px-10">
+                 <p className={`text-[10px] font-black text-gray-300 uppercase w-full text-center ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
+                    {t('footer')}
                  </p>
               </footer>
             )}
