@@ -155,8 +155,6 @@ function Home() {
   return (
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
-        
-        {/* LEFT SECTION */}
         <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start items-start">
           <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
             {t('hero.title')}
@@ -169,7 +167,6 @@ function Home() {
           </p>
         </div>
 
-        {/* RIGHT SECTION */}
         <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-start items-start">
           <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
@@ -305,7 +302,7 @@ function Contact() {
             </div>
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.loc')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4">{t('hero.location')}</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">{t('hero.location')}</p>
             </div>
           </div>
         </div>
@@ -360,10 +357,15 @@ export default function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          
           <LanguageContext.Consumer>
             {({ lang }) => (
-              <footer className="py-20 bg-white border-t border-gray-50 text-center">
-                 <p style={{ direction: 'ltr' }} className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
+              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center px-6">
+                 {/* 
+                    Using dir="ltr" on the <p> tag ensures the bullet and year symbols 
+                    don't flip around. It keeps the format English but swaps the name 
+                 */}
+                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
                     © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
                  </p>
               </footer>
