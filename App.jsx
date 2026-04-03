@@ -102,23 +102,20 @@ function LanguageProvider({ children }) {
 
 const useI18n = () => useContext(LanguageContext);
 
-/* ================= STYLES ================= */
-const serifFont = "font-serif italic tracking-tight text-[#823894]";
-
 /* ================= NAVIGATION ================= */
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { lang, toggleLanguage, t } = useI18n();
 
   return (
-    <nav className="bg-white border-b-2 border-purple-50 sticky top-0 z-50 px-8 py-6">
+    <nav className="bg-white border-b-2 border-purple-50 sticky top-0 z-50 px-8 py-4 md:py-6">
       <div className="max-w-[1400px] mx-auto flex justify-between items-center">
         
         <Link to="/" className="flex items-center">
-          <img src="/HeyaBuilds1.PNG" alt="Logo" className="h-[80px] md:h-[120px] w-auto object-contain transition-transform hover:scale-105" />
+          <img src="/HeyaBuilds1.PNG" alt="Logo" className="h-[70px] md:h-[110px] w-auto object-contain transition-transform hover:scale-105" />
         </Link>
 
-        <div className="hidden md:flex gap-8 items-center text-xs font-black uppercase tracking-[0.2em] text-gray-800">
+        <div className={`hidden md:flex gap-8 items-center text-xs font-black uppercase tracking-[0.15em] text-gray-800 ${lang === 'ar' ? 'font-bold tracking-normal text-sm' : ''}`}>
           <Link className="hover:text-[#823894] transition" to="/">{t('nav.home')}</Link>
           <Link className="hover:text-[#823894] transition" to="/about">{t('nav.about')}</Link>
           <Link className="hover:text-[#823894] transition" to="/programs">{t('nav.programs')}</Link>
@@ -127,7 +124,7 @@ function Navbar() {
           
           <button 
             onClick={toggleLanguage}
-            className="border-2 border-[#823894] text-[#823894] px-4 py-2 rounded-full font-bold hover:bg-[#823894] hover:text-white transition"
+            className="border-2 border-[#823894] text-[#823894] px-4 py-2 rounded-full font-bold hover:bg-[#823894] hover:text-white transition min-w-[100px]"
           >
             {lang === 'en' ? 'العربية' : 'English'}
           </button>
@@ -158,17 +155,27 @@ function Navbar() {
 /* ================= HOME ================= */
 function Home() {
   const { t, lang } = useI18n();
+  const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+
   return (
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
+        {/* LEFT SECTION */}
         <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20">
-          <h1 className={`text-7xl md:text-9xl ${serifFont}`}>{t('hero.title')}</h1>
-          <p className="mt-8 text-sm md:text-base tracking-[0.5em] text-gray-500 uppercase font-black">{t('hero.subtitle')}</p>
-          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600">{t('hero.description')}</p>
+          <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont}`}>
+            {t('hero.title')}
+          </h1>
+          <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
+            {t('hero.subtitle')}
+          </p>
+          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic">
+            {t('hero.description')}
+          </p>
         </div>
 
+        {/* RIGHT SECTION */}
         <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-left">
-          <h2 className={`text-8xl md:text-[10rem] leading-none mb-10 ${serifFont} text-white`}>
+          <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
           </h2>
           <div className="flex items-center justify-center md:justify-start gap-4 text-2xl opacity-90 italic">
@@ -181,7 +188,7 @@ function Home() {
       </section>
 
       <section className="py-32 bg-[#2D1233] text-white text-center px-10">
-        <h2 className="text-4xl md:text-6xl max-w-5xl mx-auto leading-tight font-serif italic tracking-tight text-white">
+        <h2 className={`max-w-5xl mx-auto leading-tight font-serif italic tracking-tight text-white ${lang === 'ar' ? 'text-3xl md:text-5xl font-sans not-italic tracking-normal' : 'text-4xl md:text-6xl'}`}>
           {t('vision')}
         </h2>
       </section>
@@ -191,7 +198,9 @@ function Home() {
 
 /* ================= ABOUT ================= */
 function About() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+  
   const activities = [
     { icon: "🎤", title: t('about.act1'), desc: t('about.act1d') },
     { icon: "💬", title: t('about.act2'), desc: t('about.act2d') },
@@ -203,25 +212,25 @@ function About() {
     <div className="bg-white py-24 px-10 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
           <div>
-            <h1 className={`text-6xl mb-10 ${serifFont}`}>{t('about.title')}</h1>
+            <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} mb-10 ${serifFont}`}>{t('about.title')}</h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-6">{t('about.p1')}</p>
             <p className="text-xl text-gray-600 leading-relaxed">{t('about.p2')}</p>
           </div>
           <div className="bg-[#F3EDF5] p-16 rounded-[4rem] border-2 border-purple-100 relative shadow-inner">
-             <p className={`text-4xl leading-snug mb-8 ${serifFont}`}>"{t('about.quote')}"</p>
+             <p className={`${lang === 'ar' ? 'text-3xl' : 'text-4xl'} leading-snug mb-8 ${serifFont}`}>"{t('about.quote')}"</p>
              <p className="text-[#823894] font-black text-2xl">{t('about.founder')}</p>
              <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">{t('about.role')}</p>
           </div>
         </div>
 
         <div className="mt-20">
-            <h2 className={`text-6xl text-center mb-20 ${serifFont}`}>{t('about.whatWeDo')}</h2>
+            <h2 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-20 ${serifFont}`}>{t('about.whatWeDo')}</h2>
             <div className="grid md:grid-cols-2 gap-10">
             {activities.map((a, i) => (
                 <div key={i} className="p-12 bg-gray-50 rounded-[3rem] border border-purple-50 flex gap-8 hover:bg-[#F3EDF5] transition-all group shadow-sm hover:shadow-xl">
                 <span className="text-6xl group-hover:rotate-12 transition-transform">{a.icon}</span>
                 <div>
-                    <h3 className="text-3xl font-black text-gray-800 mb-3">{a.title}</h3>
+                    <h3 className={`font-black text-gray-800 mb-3 ${lang === 'ar' ? 'text-2xl' : 'text-3xl'}`}>{a.title}</h3>
                     <p className="text-xl text-gray-600 leading-relaxed">{a.desc}</p>
                 </div>
                 </div>
@@ -234,7 +243,9 @@ function About() {
 
 /* ================= PROGRAMS ================= */
 function Programs() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+  
   const programsList = [
     [t('programs.p1'), t('programs.p1d'), "🚀"],
     [t('programs.p2'), t('programs.p2d'), "🤖"],
@@ -243,12 +254,12 @@ function Programs() {
 
   return (
     <div className="min-h-screen px-6 py-24 max-w-7xl mx-auto">
-      <h1 className={`text-7xl text-center mb-20 ${serifFont}`}>{t('programs.title')}</h1>
+      <h1 className={`${lang === 'ar' ? 'text-6xl' : 'text-7xl'} text-center mb-20 ${serifFont}`}>{t('programs.title')}</h1>
       <div className="grid md:grid-cols-3 gap-10 mt-12">
         {programsList.map(([title, desc, icon]) => (
           <div key={title} className="p-12 border-2 border-[#F3EDF5] rounded-[4rem] shadow-sm hover:shadow-2xl transition-all hover:-translate-y-2 bg-white text-center">
             <div className="text-7xl mb-8">{icon}</div>
-            <h3 className="text-3xl font-black text-gray-800 mb-4">{title}</h3>
+            <h3 className={`font-black text-gray-800 mb-4 ${lang === 'ar' ? 'text-2xl' : 'text-3xl'}`}>{title}</h3>
             <p className="text-xl text-gray-500 leading-relaxed mb-10">{desc}</p>
             <Link to="/community" className="px-10 py-3 bg-[#823894] text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#2D1233] transition shadow-lg">
               {t('programs.apply')}
@@ -262,11 +273,13 @@ function Programs() {
 
 /* ================= COMMUNITY ================= */
 function Community() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+
   return (
     <div className="py-24 bg-[#F3EDF5] px-6 min-h-screen">
       <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white">
-        <h1 className={`text-6xl text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
+        <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
         <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
           <iframe 
             src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
@@ -280,20 +293,22 @@ function Community() {
 
 /* ================= CONTACT ================= */
 function Contact() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+
   return (
     <div className="min-h-screen py-24 px-6 flex flex-col items-center bg-[#2D1233]">
-      <h1 className={`text-7xl mb-16 ${serifFont} text-white`}>{t('contact.title')}</h1>
+      <h1 className={`${lang === 'ar' ? 'text-6xl' : 'text-7xl'} mb-16 ${serifFont} text-white`}>{t('contact.title')}</h1>
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-20">
         <div className="text-white space-y-12 flex flex-col justify-center">
-          <h2 className="text-5xl font-black leading-tight tracking-tight">{t('contact.subtitle')}</h2>
+          <h2 className={`font-black leading-tight tracking-tight ${lang === 'ar' ? 'text-4xl' : 'text-5xl'}`}>{t('contact.subtitle')}</h2>
           <div className="space-y-10">
             <div>
-              <p className="uppercase tracking-[0.4em] text-purple-300 text-xs font-black mb-4">{t('contact.email')}</p>
+              <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.email')}</p>
               <p className="text-3xl font-bold border-b border-purple-800 pb-4">heyabuilds@gmail.com</p>
             </div>
             <div>
-              <p className="uppercase tracking-[0.4em] text-purple-300 text-xs font-black mb-4">{t('contact.loc')}</p>
+              <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.loc')}</p>
               <p className="text-3xl font-bold border-b border-purple-800 pb-4">{t('hero.location')}</p>
             </div>
           </div>
@@ -332,7 +347,6 @@ export default function App() {
               font-family: 'Cairo', sans-serif;
               font-style: normal;
             }
-            /* Ensures the footer always looks correct regardless of direction */
             footer p {
               direction: ltr !important;
               display: inline-block;
