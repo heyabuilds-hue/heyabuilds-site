@@ -115,7 +115,7 @@ function Navbar() {
           <img src="/HeyaBuilds1.PNG" alt="Logo" className="h-[70px] md:h-[110px] w-auto object-contain transition-transform hover:scale-105" />
         </Link>
 
-        <div className={`hidden md:flex gap-8 items-center text-xs font-black uppercase tracking-[0.15em] text-gray-800 ${lang === 'ar' ? 'font-bold tracking-normal text-sm' : ''}`}>
+        <div className={`hidden md:flex gap-8 items-center font-black uppercase ${lang === 'ar' ? 'text-sm tracking-normal' : 'text-xs tracking-[0.15em]'} text-gray-800`}>
           <Link className="hover:text-[#823894] transition" to="/">{t('nav.home')}</Link>
           <Link className="hover:text-[#823894] transition" to="/about">{t('nav.about')}</Link>
           <Link className="hover:text-[#823894] transition" to="/programs">{t('nav.programs')}</Link>
@@ -160,8 +160,9 @@ function Home() {
   return (
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
+        
         {/* LEFT SECTION */}
-        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20">
+        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start">
           <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont}`}>
             {t('hero.title')}
           </h1>
@@ -174,14 +175,14 @@ function Home() {
         </div>
 
         {/* RIGHT SECTION */}
-        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-left">
+        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-start">
           <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
           </h2>
           <div className="flex items-center justify-center md:justify-start gap-4 text-2xl opacity-90 italic">
-             <span>📍</span> {t('hero.location')}
+             <span>📍</span> <span>{t('hero.location')}</span>
           </div>
-          <Link to="/community" className="mt-14 w-fit mx-auto md:mx-0 px-12 py-5 bg-white text-[#823894] text-xl font-black rounded-full hover:scale-105 transition shadow-2xl uppercase">
+          <Link to="/community" className="mt-14 w-fit mx-auto md:ms-0 md:me-auto px-12 py-5 bg-white text-[#823894] text-xl font-black rounded-full hover:scale-105 transition shadow-2xl uppercase">
             {t('hero.getStarted')}
           </Link>
         </div>
@@ -326,6 +327,8 @@ function Contact() {
 
 /* ================= APP WRAPPER ================= */
 export default function App() {
+  const { lang } = useI18n() || { lang: 'en' }; // Fallback for first render
+
   return (
     <LanguageProvider>
       <BrowserRouter>
@@ -364,11 +367,15 @@ export default function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-          <footer className="py-20 bg-white border-t border-gray-50 text-center">
-             <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
-                © 2026 HeyaBuilds Medina • Built to Inspire
-             </p>
-          </footer>
+          <LanguageContext.Consumer>
+            {({ lang }) => (
+              <footer className="py-20 bg-white border-t border-gray-50 text-center">
+                 <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase ltr-force">
+                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
+                 </p>
+              </footer>
+            )}
+          </LanguageContext.Consumer>
         </div>
       </BrowserRouter>
     </LanguageProvider>
