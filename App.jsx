@@ -34,8 +34,7 @@ const translations = {
       p3: "Mentorship", p3d: "1:1 guidance from industry experts",
       apply: "Apply Now"
     },
-    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" },
-    footer: "© 2026 HeyaBuilds Medina • Built to Inspire"
+    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" }
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
@@ -68,8 +67,7 @@ const translations = {
       p3: "التوجيه الشخصي", p3d: "إرشادات مباشرة من خبراء الصناعة",
       apply: "سجلي الآن"
     },
-    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" },
-    footer: "© ٢٠٢٦ هِيَ تبني - المدينة المنورة • صُنعت للإلهام"
+    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" }
   }
 };
 
@@ -157,7 +155,6 @@ function Home() {
   return (
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
-        {/* LEFT SECTION (HeyaBuilds / هي تبني) */}
         <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start items-start">
           <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
             {t('hero.title')}
@@ -165,12 +162,11 @@ function Home() {
           <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black w-full ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
             {t('hero.subtitle')}
           </p>
-          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic w-full text-start">
+          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic w-full">
             {t('hero.description')}
           </p>
         </div>
 
-        {/* RIGHT SECTION (Let's Build / لنبني) */}
         <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-start items-start">
           <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
@@ -272,9 +268,6 @@ function Programs() {
 function Community() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
-  
-  // Dynamic Tally URL based on language
-  const tallyUrl = `https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1${lang === 'ar' ? '&lang=ar' : ''}`;
 
   return (
     <div className="py-24 bg-[#F3EDF5] px-6 min-h-screen">
@@ -282,7 +275,7 @@ function Community() {
         <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
         <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
           <iframe 
-            src={tallyUrl} 
+            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
             width="100%" height="100%" frameBorder="0" title="Join"
           ></iframe>
         </div>
@@ -295,9 +288,6 @@ function Community() {
 function Contact() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
-  
-  // Dynamic Tally URL based on language
-  const tallyUrl = `https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1${lang === 'ar' ? '&lang=ar' : ''}`;
 
   return (
     <div className="min-h-screen py-24 px-6 flex flex-col items-center bg-[#2D1233]">
@@ -308,17 +298,17 @@ function Contact() {
           <div className="space-y-10">
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.email')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4">heyabuilds@gmail.com</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">heyabuilds@gmail.com</p>
             </div>
             <div>
               <p className={`uppercase text-purple-300 text-xs font-black mb-4 ${lang === 'ar' ? '' : 'tracking-[0.4em]'}`}>{t('contact.loc')}</p>
-              <p className="text-3xl font-bold border-b border-purple-800 pb-4">{t('hero.location')}</p>
+              <p className="text-3xl font-bold border-b border-purple-800 pb-4 ltr-force">{t('hero.location')}</p>
             </div>
           </div>
         </div>
         <div className="bg-white rounded-[4rem] overflow-hidden h-[700px] shadow-2xl">
           <iframe 
-            src={tallyUrl} 
+            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
             width="100%" height="100%" frameBorder="0" title="Contact"
           ></iframe>
         </div>
@@ -350,6 +340,11 @@ export default function App() {
               font-family: 'Cairo', sans-serif;
               font-style: normal;
             }
+            .ltr-force {
+              direction: ltr !important;
+              unicode-bidi: isolate;
+              display: inline-block;
+            }
           `}
         </style>
         
@@ -364,10 +359,14 @@ export default function App() {
           </Routes>
           
           <LanguageContext.Consumer>
-            {({ lang, t }) => (
-              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center w-full px-10">
-                 <p className={`text-[10px] font-black text-gray-300 uppercase w-full text-center ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
-                    {t('footer')}
+            {({ lang }) => (
+              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center px-6">
+                 {/* 
+                    Using dir="ltr" on the <p> tag ensures the bullet and year symbols 
+                    don't flip around. It keeps the format English but swaps the name 
+                 */}
+                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
+                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
                  </p>
               </footer>
             )}
