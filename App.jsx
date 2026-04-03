@@ -34,8 +34,7 @@ const translations = {
       p3: "Mentorship", p3d: "1:1 guidance from industry experts",
       apply: "Apply Now"
     },
-    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" },
-    footer: "© 2026 HeyaBuilds Medina • Built to Inspire"
+    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" }
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
@@ -68,8 +67,7 @@ const translations = {
       p3: "التوجيه الشخصي", p3d: "إرشادات مباشرة من خبراء الصناعة",
       apply: "سجلي الآن"
     },
-    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" },
-    footer: "© ٢٠٢٦ هِيَ تبني - المدينة المنورة • صُنعت للإلهام"
+    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" }
   }
 };
 
@@ -158,7 +156,7 @@ function Home() {
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
         
-        {/* LEFT SECTION (LIGHT PURPLE) */}
+        {/* LEFT SECTION */}
         <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start items-start">
           <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
             {t('hero.title')}
@@ -171,7 +169,7 @@ function Home() {
           </p>
         </div>
 
-        {/* RIGHT SECTION (DARK PURPLE) */}
+        {/* RIGHT SECTION */}
         <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-start items-start">
           <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
@@ -345,7 +343,6 @@ export default function App() {
               font-family: 'Cairo', sans-serif;
               font-style: normal;
             }
-            /* Helper to keep emails/dates LTR always */
             .ltr-force {
               direction: ltr !important;
               unicode-bidi: isolate;
@@ -363,13 +360,11 @@ export default function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-
-          {/* DYNAMIC FOOTER: All English in EN mode, All Arabic in AR mode */}
           <LanguageContext.Consumer>
-            {({ lang, t }) => (
-              <footer className={`py-20 bg-white border-t border-gray-50 px-10 ${lang === 'ar' ? 'text-right' : 'text-center'}`}>
-                 <p className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
-                    {t('footer')}
+            {({ lang }) => (
+              <footer className="py-20 bg-white border-t border-gray-50 text-center">
+                 <p style={{ direction: 'ltr' }} className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
+                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
                  </p>
               </footer>
             )}
