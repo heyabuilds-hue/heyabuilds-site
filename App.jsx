@@ -2,9 +2,7 @@ import React, { useState, createContext, useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 /* ================= TALLY FORM IDs ================= */
-// المعرف الإنجليزي
 const FORM_EN_ID = "pbWR6q"; 
-// المعرف العربي
 const FORM_AR_ID = "MeL0Vk"; 
 
 
@@ -41,7 +39,8 @@ const translations = {
       p3: "Mentorship", p3d: "1:1 guidance from industry experts",
       apply: "Apply Now"
     },
-    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" }
+    contact: { title: "Get In Touch", subtitle: "We’d love to hear from you.", email: "Email Us", loc: "Location" },
+    footer: "© 2026 HeyaBuilds Medina • Built to Inspire"
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
@@ -74,7 +73,8 @@ const translations = {
       p3: "التوجيه الشخصي", p3d: "إرشادات مباشرة من خبراء الصناعة",
       apply: "سجلي الآن"
     },
-    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" }
+    contact: { title: "تواصل معنا", subtitle: "يسعدنا سماع صوتك", email: "بريدنا الإلكتروني", loc: "الموقع" },
+    footer: "© ٢٠٢٦ هِيَ تبني - المدينة المنورة • صُنعت للإلهام"
   }
 };
 
@@ -83,10 +83,7 @@ const LanguageContext = createContext();
 
 function LanguageProvider({ children }) {
   const [lang, setLang] = useState("en");
-  
-  const toggleLanguage = () => {
-    setLang((prev) => (prev === "en" ? "ar" : "en"));
-  };
+  const toggleLanguage = () => setLang((prev) => (prev === "en" ? "ar" : "en"));
 
   useEffect(() => {
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
@@ -276,7 +273,6 @@ function Community() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
 
-  // يتبدل المعرف حسب اللغة المختارة
   const activeID = lang === 'ar' ? FORM_AR_ID : FORM_EN_ID;
 
   return (
@@ -299,7 +295,6 @@ function Contact() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
 
-  // يتبدل المعرف حسب اللغة المختارة
   const activeID = lang === 'ar' ? FORM_AR_ID : FORM_EN_ID;
 
   return (
@@ -357,10 +352,11 @@ export default function App() {
           </Routes>
           
           <LanguageContext.Consumer>
-            {({ lang }) => (
+            {({ lang, t }) => (
               <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center w-full px-10">
-                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase w-full text-center ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
-                    © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
+                 {/* تم ضبط المحاذاة للمنتصف دائماً وتغيير النص بالكامل حسب اللغة */}
+                 <p className={`text-[10px] font-black text-gray-300 uppercase w-full text-center ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
+                    {t('footer')}
                  </p>
               </footer>
             )}
