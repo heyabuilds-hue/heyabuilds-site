@@ -5,13 +5,20 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 const translations = {
   en: {
     nav: { home: "Home", about: "About", programs: "Programs", join: "Join Community", contact: "Contact" },
-    hero: { title: "HeyaBuilds", subtitle: "Connect • Create • Inspire", description: "Building the future of technology in Saudi Arabia through community and collaboration.", cta: "Let's Build!", location: "Medina, Saudi Arabia", getStarted: "Get Started" },
+    hero: { 
+      title: "HeyaBuilds", 
+      subtitle: "Connect • Create • Inspire", 
+      description: "Building the future of technology in Saudi Arabia through community and collaboration.", 
+      cta: "Let's Build!", 
+      location: "Medina, Saudi Arabia", 
+      getStarted: "Get Started" 
+    },
     vision: '"When women build technology together, they create stronger innovation ecosystems."',
     about: {
       title: "Our Story",
       p1: "Medina has a growing number of talented women in tech. However, many struggle to find the right environment to start their journey.",
       p2: "HeyaBuilds was founded by Samah Alharbi to provide the network, mentorship, and space to turn ambition into action.",
-      quote: "I built what I needed — so others wouldn't have to build alone.",
+      quote: "I built this so others wouldn't have to build alone.",
       founder: "Samah Alharbi",
       role: "Founder & CEO, Medalyze",
       whatWeDo: "What We Do",
@@ -31,13 +38,20 @@ const translations = {
   },
   ar: {
     nav: { home: "الرئيسية", about: "عن المبادرة", programs: "البرامج", join: "انضمي إلينا", contact: "تواصل معنا" },
-    hero: { title: "هيا بيلدز", subtitle: "اتصال • ابتكار • إلهام", description: "بناء مستقبل التكنولوجيا في المملكة العربية السعودية من خلال المجتمع والتعاون.", cta: "لنـبني!", location: "المدينة المنورة، المملكة العربية السعودية", getStarted: "ابدئي الآن" },
+    hero: { 
+      title: "هِيَ تبني", 
+      subtitle: "اتصال • ابتكار • إلهام", 
+      description: "بناء مستقبل التكنولوجيا في المملكة العربية السعودية من خلال المجتمع والتعاون.", 
+      cta: "لنـبني!", 
+      location: "المدينة المنورة، المملكة العربية السعودية", 
+      getStarted: "ابدئي الآن" 
+    },
     vision: '"عندما تبني النساء التكنولوجيا معاً، فإنهن يخلقن أنظمة ابتكار أقوى."',
     about: {
       title: "قصتنا",
       p1: "تضم المدينة المنورة عدداً متزايداً من النساء الموهوبات في مجال التقنية. ومع ذلك، تواجه الكثيرات صعوبة في العثور على البيئة المناسبة لبدء رحلتهن.",
-      p2: "تأسست هيا بيلدز على يد سماح الحربي لتوفير الشبكة والتدريب والمساحة لتحويل الطموح إلى واقع.",
-      quote: "بنيت ما كنت أحتاجه — حتى لا تضطر الأخريات للبناء بمفردهن.",
+      p2: "تأسست (هِيَ تبني) على يد سماح الحربي لتوفير الشبكة والتدريب والمساحة لتحويل الطموح إلى واقع.",
+      quote: "بنيتُ هذا لكي لا تضطر الأخريات للبناء بمفردهن.",
       founder: "سماح الحربي",
       role: "المؤسس والرئيس التنفيذي، ميدالايز",
       whatWeDo: "ماذا نفعل",
@@ -111,7 +125,6 @@ function Navbar() {
           <Link className="hover:text-[#823894] transition" to="/community">{t('nav.join')}</Link>
           <Link className="bg-[#823894] text-white px-8 py-4 rounded-full hover:bg-[#2D1233] transition shadow-lg" to="/contact">{t('nav.contact')}</Link>
           
-          {/* Language Switcher Button */}
           <button 
             onClick={toggleLanguage}
             className="border-2 border-[#823894] text-[#823894] px-4 py-2 rounded-full font-bold hover:bg-[#823894] hover:text-white transition"
@@ -135,7 +148,7 @@ function Navbar() {
           <Link onClick={() => setIsOpen(false)} to="/about">{t('nav.about')}</Link>
           <Link onClick={() => setIsOpen(false)} to="/programs">{t('nav.programs')}</Link>
           <Link onClick={() => setIsOpen(false)} to="/community">{t('nav.join')}</Link>
-          <button onClick={toggleLanguage} className="text-[#823894]">{lang === 'en' ? 'العربية' : 'English'}</button>
+          <button onClick={() => {toggleLanguage(); setIsOpen(false);}} className="text-[#823894]">{lang === 'en' ? 'العربية' : 'English'}</button>
         </div>
       )}
     </nav>
@@ -192,9 +205,7 @@ function About() {
           <div>
             <h1 className={`text-6xl mb-10 ${serifFont}`}>{t('about.title')}</h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-6">{t('about.p1')}</p>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              {t('about.p2')}
-            </p>
+            <p className="text-xl text-gray-600 leading-relaxed">{t('about.p2')}</p>
           </div>
           <div className="bg-[#F3EDF5] p-16 rounded-[4rem] border-2 border-purple-100 relative shadow-inner">
              <p className={`text-4xl leading-snug mb-8 ${serifFont}`}>"{t('about.quote')}"</p>
@@ -251,16 +262,15 @@ function Programs() {
 
 /* ================= COMMUNITY ================= */
 function Community() {
-  const { lang, t } = useI18n();
+  const { t } = useI18n();
   return (
     <div className="py-24 bg-[#F3EDF5] px-6 min-h-screen">
       <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white">
         <h1 className={`text-6xl text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
-        
-        <div className="w-full h-[850px] rounded-[2rem] overflow-hidden">
+        <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
           <iframe 
-            src={`https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1${lang === 'ar' ? '&lang=ar' : ''}`} 
-            width="100%" height="100%" frameBorder="0" title="Join HeyaBuilds"
+            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
+            width="100%" height="100%" frameBorder="0" title="Join"
           ></iframe>
         </div>
       </div>
@@ -270,7 +280,7 @@ function Community() {
 
 /* ================= CONTACT ================= */
 function Contact() {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   return (
     <div className="min-h-screen py-24 px-6 flex flex-col items-center bg-[#2D1233]">
       <h1 className={`text-7xl mb-16 ${serifFont} text-white`}>{t('contact.title')}</h1>
@@ -290,7 +300,7 @@ function Contact() {
         </div>
         <div className="bg-white rounded-[4rem] overflow-hidden h-[700px] shadow-2xl">
           <iframe 
-            src={`https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1${lang === 'ar' ? '&lang=ar' : ''}`} 
+            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
             width="100%" height="100%" frameBorder="0" title="Contact"
           ></iframe>
         </div>
@@ -322,6 +332,12 @@ export default function App() {
               font-family: 'Cairo', sans-serif;
               font-style: normal;
             }
+            /* Ensures the footer always looks correct regardless of direction */
+            footer p {
+              direction: ltr !important;
+              display: inline-block;
+              width: 100%;
+            }
           `}
         </style>
         
@@ -335,7 +351,9 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <footer className="py-20 bg-white border-t border-gray-50 text-center">
-             <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">© 2026 HeyaBuilds Medina • Built to Inspire</p>
+             <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
+                © 2026 HeyaBuilds Medina • Built to Inspire
+             </p>
           </footer>
         </div>
       </BrowserRouter>
