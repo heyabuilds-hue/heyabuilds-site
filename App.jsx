@@ -1,6 +1,13 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
+/* ================= TALLY FORM IDs ================= */
+// المعرف الإنجليزي
+const FORM_EN_ID = "pbWR6q"; 
+// المعرف العربي
+const FORM_AR_ID = "MeL0Vk"; 
+
+
 /* ================= TRANSLATIONS ================= */
 const translations = {
   en: {
@@ -156,19 +163,19 @@ function Home() {
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
         <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start items-start">
-          <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
+          <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full text-start`}>
             {t('hero.title')}
           </h1>
-          <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black w-full ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
+          <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black w-full text-start ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
             {t('hero.subtitle')}
           </p>
-          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic w-full">
+          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic w-full text-start">
             {t('hero.description')}
           </p>
         </div>
 
         <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-start items-start">
-          <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
+          <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full text-start ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
           </h2>
           <div className="flex items-center justify-start gap-4 text-2xl opacity-90 italic w-full">
@@ -206,8 +213,8 @@ function About() {
         <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
           <div className="text-start">
             <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} mb-10 ${serifFont}`}>{t('about.title')}</h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-6">{t('about.p1')}</p>
-            <p className="text-xl text-gray-600 leading-relaxed">{t('about.p2')}</p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-6 text-start">{t('about.p1')}</p>
+            <p className="text-xl text-gray-600 leading-relaxed text-start">{t('about.p2')}</p>
           </div>
           <div className="bg-[#F3EDF5] p-16 rounded-[4rem] border-2 border-purple-100 relative shadow-inner text-start">
              <p className={`${lang === 'ar' ? 'text-3xl' : 'text-4xl'} leading-snug mb-8 ${serifFont}`}>"{t('about.quote')}"</p>
@@ -220,7 +227,7 @@ function About() {
             <h2 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-20 ${serifFont}`}>{t('about.whatWeDo')}</h2>
             <div className="grid md:grid-cols-2 gap-10">
             {activities.map((a, i) => (
-                <div key={i} className="p-12 bg-gray-50 rounded-[3rem] border border-purple-50 flex gap-8 hover:bg-[#F3EDF5] transition-all group shadow-sm hover:shadow-xl text-start">
+                <div key={i} className="p-12 bg-gray-50 rounded-[3rem] border border-purple-50 flex gap-8 hover:bg-[#F3EDF5] transition-all group shadow-sm hover:shadow-xl text-start items-center">
                 <span className="text-6xl group-hover:rotate-12 transition-transform">{a.icon}</span>
                 <div>
                     <h3 className={`font-black text-gray-800 mb-3 ${lang === 'ar' ? 'text-2xl' : 'text-3xl'}`}>{a.title}</h3>
@@ -269,13 +276,16 @@ function Community() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
 
+  // يتبدل المعرف حسب اللغة المختارة
+  const activeID = lang === 'ar' ? FORM_AR_ID : FORM_EN_ID;
+
   return (
     <div className="py-24 bg-[#F3EDF5] px-6 min-h-screen">
       <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white text-center">
         <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
         <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
           <iframe 
-            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
+            src={`https://tally.so/embed/${activeID}?hideTitle=1&transparentBackground=1`} 
             width="100%" height="100%" frameBorder="0" title="Join"
           ></iframe>
         </div>
@@ -288,6 +298,9 @@ function Community() {
 function Contact() {
   const { t, lang } = useI18n();
   const serifFont = `font-serif italic tracking-tight text-[#823894] ${lang === 'ar' ? 'font-sans not-italic tracking-normal' : ''}`;
+
+  // يتبدل المعرف حسب اللغة المختارة
+  const activeID = lang === 'ar' ? FORM_AR_ID : FORM_EN_ID;
 
   return (
     <div className="min-h-screen py-24 px-6 flex flex-col items-center bg-[#2D1233]">
@@ -308,7 +321,7 @@ function Contact() {
         </div>
         <div className="bg-white rounded-[4rem] overflow-hidden h-[700px] shadow-2xl">
           <iframe 
-            src="https://tally.so/embed/MeL0Vk?hideTitle=1&transparentBackground=1" 
+            src={`https://tally.so/embed/${activeID}?hideTitle=1&transparentBackground=1`} 
             width="100%" height="100%" frameBorder="0" title="Contact"
           ></iframe>
         </div>
@@ -325,26 +338,11 @@ export default function App() {
         <style>
           {`
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,800&family=Cairo:wght@400;700;900&display=swap');
-            
-            :root {
-              font-family: 'Montserrat', sans-serif;
-              scroll-behavior: smooth;
-            }
-            [lang="ar"] :root {
-              font-family: 'Cairo', sans-serif;
-            }
-            .font-serif {
-              font-family: 'Playfair Display', serif;
-            }
-            [lang="ar"] .font-serif {
-              font-family: 'Cairo', sans-serif;
-              font-style: normal;
-            }
-            .ltr-force {
-              direction: ltr !important;
-              unicode-bidi: isolate;
-              display: inline-block;
-            }
+            :root { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+            [lang="ar"] :root { font-family: 'Cairo', sans-serif; }
+            .font-serif { font-family: 'Playfair Display', serif; }
+            [lang="ar"] .font-serif { font-family: 'Cairo', sans-serif; font-style: normal; }
+            .ltr-force { direction: ltr !important; unicode-bidi: isolate; display: inline-block; }
           `}
         </style>
         
@@ -360,12 +358,8 @@ export default function App() {
           
           <LanguageContext.Consumer>
             {({ lang }) => (
-              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center px-6">
-                 {/* 
-                    Using dir="ltr" on the <p> tag ensures the bullet and year symbols 
-                    don't flip around. It keeps the format English but swaps the name 
-                 */}
-                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
+              <footer className="py-20 bg-white border-t border-gray-50 flex flex-col items-center justify-center text-center w-full px-10">
+                 <p dir="ltr" className={`text-[10px] font-black text-gray-300 uppercase w-full text-center ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.6em]'}`}>
                     © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
                  </p>
               </footer>
