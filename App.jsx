@@ -110,7 +110,6 @@ function Navbar() {
   return (
     <nav className="bg-white border-b-2 border-purple-50 sticky top-0 z-50 px-8 py-4 md:py-6">
       <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-        
         <Link to="/" className="flex items-center">
           <img src="/HeyaBuilds1.PNG" alt="Logo" className="h-[70px] md:h-[110px] w-auto object-contain transition-transform hover:scale-105" />
         </Link>
@@ -121,11 +120,7 @@ function Navbar() {
           <Link className="hover:text-[#823894] transition" to="/programs">{t('nav.programs')}</Link>
           <Link className="hover:text-[#823894] transition" to="/community">{t('nav.join')}</Link>
           <Link className="bg-[#823894] text-white px-8 py-4 rounded-full hover:bg-[#2D1233] transition shadow-lg" to="/contact">{t('nav.contact')}</Link>
-          
-          <button 
-            onClick={toggleLanguage}
-            className="border-2 border-[#823894] text-[#823894] px-4 py-2 rounded-full font-bold hover:bg-[#823894] hover:text-white transition min-w-[100px]"
-          >
+          <button onClick={toggleLanguage} className="border-2 border-[#823894] text-[#823894] px-4 py-2 rounded-full font-bold hover:bg-[#823894] hover:text-white transition min-w-[100px]">
             {lang === 'en' ? 'العربية' : 'English'}
           </button>
         </div>
@@ -161,28 +156,28 @@ function Home() {
     <div className="bg-white">
       <section className="flex flex-col md:flex-row min-h-[85vh]">
         
-        {/* LEFT SECTION */}
-        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-start">
-          <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont}`}>
+        {/* LEFT SECTION (LIGHT PURPLE) - "هي تبني" */}
+        <div className="flex-1 bg-[#F3EDF5] flex flex-col justify-center px-12 md:px-24 py-20 text-center md:text-start items-center md:items-start">
+          <h1 className={`${lang === 'ar' ? 'text-6xl md:text-8xl' : 'text-7xl md:text-9xl'} ${serifFont} w-full`}>
             {t('hero.title')}
           </h1>
-          <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
+          <p className={`mt-8 text-sm md:text-base text-gray-500 uppercase font-black w-full ${lang === 'ar' ? 'tracking-normal' : 'tracking-[0.5em]'}`}>
             {t('hero.subtitle')}
           </p>
-          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic">
+          <p className="mt-10 max-w-md text-xl leading-relaxed text-gray-600 italic w-full">
             {t('hero.description')}
           </p>
         </div>
 
-        {/* RIGHT SECTION */}
-        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-start">
-          <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
+        {/* RIGHT SECTION (DARK PURPLE) - "لنبني!" */}
+        <div className="flex-1 bg-[#823894] flex flex-col justify-center px-12 md:px-24 py-20 text-white text-center md:text-start items-center md:items-start">
+          <h2 className={`${lang === 'ar' ? 'text-7xl md:text-8xl' : 'text-8xl md:text-[10rem]'} leading-tight mb-10 font-serif italic text-white w-full ${lang === 'ar' ? 'font-sans not-italic' : ''}`}>
             {lang === 'en' ? <>Let's<br/>Build!</> : <>لنـبني!</>}
           </h2>
-          <div className="flex items-center justify-center md:justify-start gap-4 text-2xl opacity-90 italic">
+          <div className="flex items-center justify-center md:justify-start gap-4 text-2xl opacity-90 italic w-full">
              <span>📍</span> <span>{t('hero.location')}</span>
           </div>
-          <Link to="/community" className="mt-14 w-fit mx-auto md:ms-0 md:me-auto px-12 py-5 bg-white text-[#823894] text-xl font-black rounded-full hover:scale-105 transition shadow-2xl uppercase">
+          <Link to="/community" className="mt-14 w-fit px-12 py-5 bg-white text-[#823894] text-xl font-black rounded-full hover:scale-105 transition shadow-2xl uppercase">
             {t('hero.getStarted')}
           </Link>
         </div>
@@ -212,12 +207,12 @@ function About() {
   return (
     <div className="bg-white py-24 px-10 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
-          <div>
+          <div className="text-start">
             <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} mb-10 ${serifFont}`}>{t('about.title')}</h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-6">{t('about.p1')}</p>
             <p className="text-xl text-gray-600 leading-relaxed">{t('about.p2')}</p>
           </div>
-          <div className="bg-[#F3EDF5] p-16 rounded-[4rem] border-2 border-purple-100 relative shadow-inner">
+          <div className="bg-[#F3EDF5] p-16 rounded-[4rem] border-2 border-purple-100 relative shadow-inner text-start">
              <p className={`${lang === 'ar' ? 'text-3xl' : 'text-4xl'} leading-snug mb-8 ${serifFont}`}>"{t('about.quote')}"</p>
              <p className="text-[#823894] font-black text-2xl">{t('about.founder')}</p>
              <p className="text-gray-500 uppercase tracking-widest text-xs font-bold">{t('about.role')}</p>
@@ -228,7 +223,7 @@ function About() {
             <h2 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-20 ${serifFont}`}>{t('about.whatWeDo')}</h2>
             <div className="grid md:grid-cols-2 gap-10">
             {activities.map((a, i) => (
-                <div key={i} className="p-12 bg-gray-50 rounded-[3rem] border border-purple-50 flex gap-8 hover:bg-[#F3EDF5] transition-all group shadow-sm hover:shadow-xl">
+                <div key={i} className="p-12 bg-gray-50 rounded-[3rem] border border-purple-50 flex gap-8 hover:bg-[#F3EDF5] transition-all group shadow-sm hover:shadow-xl text-start">
                 <span className="text-6xl group-hover:rotate-12 transition-transform">{a.icon}</span>
                 <div>
                     <h3 className={`font-black text-gray-800 mb-3 ${lang === 'ar' ? 'text-2xl' : 'text-3xl'}`}>{a.title}</h3>
@@ -279,7 +274,7 @@ function Community() {
 
   return (
     <div className="py-24 bg-[#F3EDF5] px-6 min-h-screen">
-      <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white">
+      <div className="max-w-5xl mx-auto bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl overflow-hidden border-2 border-white text-center">
         <h1 className={`${lang === 'ar' ? 'text-5xl' : 'text-6xl'} text-center mb-6 ${serifFont}`}>{t('nav.join')}</h1>
         <div className="w-full h-[800px] rounded-[2rem] overflow-hidden">
           <iframe 
@@ -299,9 +294,9 @@ function Contact() {
 
   return (
     <div className="min-h-screen py-24 px-6 flex flex-col items-center bg-[#2D1233]">
-      <h1 className={`${lang === 'ar' ? 'text-6xl' : 'text-7xl'} mb-16 ${serifFont} text-white`}>{t('contact.title')}</h1>
+      <h1 className={`${lang === 'ar' ? 'text-6xl' : 'text-7xl'} mb-16 ${serifFont} text-white text-center`}>{t('contact.title')}</h1>
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-20">
-        <div className="text-white space-y-12 flex flex-col justify-center">
+        <div className="text-white space-y-12 flex flex-col justify-center text-start">
           <h2 className={`font-black leading-tight tracking-tight ${lang === 'ar' ? 'text-4xl' : 'text-5xl'}`}>{t('contact.subtitle')}</h2>
           <div className="space-y-10">
             <div>
@@ -327,8 +322,6 @@ function Contact() {
 
 /* ================= APP WRAPPER ================= */
 export default function App() {
-  const { lang } = useI18n() || { lang: 'en' }; // Fallback for first render
-
   return (
     <LanguageProvider>
       <BrowserRouter>
@@ -370,7 +363,7 @@ export default function App() {
           <LanguageContext.Consumer>
             {({ lang }) => (
               <footer className="py-20 bg-white border-t border-gray-50 text-center">
-                 <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase ltr-force">
+                 <p className="text-[10px] font-black text-gray-300 tracking-[0.6em] uppercase">
                     © 2026 {lang === 'ar' ? 'هِيَ تبني' : 'HeyaBuilds'} Medina • Built to Inspire
                  </p>
               </footer>
